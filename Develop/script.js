@@ -3,7 +3,6 @@ $(document).ready(function () {
 
   // setting variables for time based functions
   var timeEl = document.getElementById("currentDay");
-  // $(".lead");
   var currentTime = new Date().getHours();
 
   // Call Back Function for time based functions
@@ -12,13 +11,13 @@ $(document).ready(function () {
     colorChange();
   }, 1000);
 
-  // Loop to create Rows and Columns
+  // Creating Rows and Columns and Button before Loop to keep variables Global
   var divRow;
   var ColumnLeft;
   var time;
-
   var saveB;
 
+  // Loop
   for (let i = 9; i < 18; i++) {
     divRow = $("<div>").addClass("row");
     $(".container").append(divRow);
@@ -41,6 +40,7 @@ $(document).ready(function () {
     saveB = $("<button>").addClass("saveBtn");
     saveB.attr("type", "submit");
     saveB.attr("value", i);
+    saveB.html("Save");
     ColumnRight.append(saveB);
     divRow.append(ColumnRight);
 
@@ -77,17 +77,12 @@ $(document).ready(function () {
 
   //save input data
 
-  // var saveBtn = $(".saveBtn");
-  var commentId;
-  var commentText;
-
   // local storage
   function getData(data) {
     var entry = localStorage.getItem(data);
     console.log("before if " + entry);
     if (entry !== null) {
       console.log("!==null");
-      // $("#cm" + data).text(entry);
       $("#cm" + data)
         .children()
         .val(entry);
@@ -96,16 +91,6 @@ $(document).ready(function () {
   }
 
   // USER input===================
-
-  // $( "#dataTable tbody tr" ).on( "click", function() {
-  //   console.log( $( this ).text() );
-  // });
-
-  // saveB.addEventListener("click", function () {
-  //   console.log("savB is here!");
-  // });
-
-  // $(document).on('click', '.saveBtn', function () {
 
   $(document).on("click", ".saveBtn", function () {
     event.preventDefault();
@@ -120,6 +105,4 @@ $(document).ready(function () {
     console.log(entryText);
     localStorage.setItem(entryID, entryText);
   });
-
-  // Display based on user input===========================
 });
