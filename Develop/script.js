@@ -1,37 +1,18 @@
-// user can save events for each hour of the day
-//  WHEN user opens the planner
-// THEN the current day is displayed at the top of the calendar
-// scrolling down shows timeblocks for standard business hours
-// timeblock is color coded to indicate whether it is in the past, present, or future
-// WHEN I click into a timeblock
-// // THEN I can enter an event
-// save button for that timeblock
-// THEN the text for that event is saved in local storage
-// refresh the page
-// THEN the saved events persist
+// DOM ELEMENTS
 
-// ROW = time, text, submit
-
-// LOCAL Storage
-
-// DOM ELEMENTS ==============================
+// setting variables for time based functions (time of day/ color change)
 var timeEl = document.getElementById("currentDay");
-$(".lead");
+// $(".lead");
+var currentTime = new Date().getHours();
 
-timeEl.innerHTML = moment().format("MMMM Do YYYY, h:mm:ss a");
-
-// CREATING BOOTSTRAP RESPONSIVE ROWS AND COLUMNS
-// var divRow;
-// var ColumnLeft;
-// var ColumnMiddle;
-// var ColumnRight;
-// var time;
-// var textArea;
-// var saveB;
+setInterval(function () {
+  timeEl.innerHTML = moment().format("MMMM Do YYYY, h:mm:ss a");
+  colorChange();
+}, 1000);
 
 for (let i = 9; i < 18; i++) {
   var divRow = $("<div>").addClass("row");
-  $(".container").prepend(divRow);
+  $(".container").append(divRow);
   console.log("check");
 
   var ColumnLeft = $("<div>").addClass("col-md-2 hour");
@@ -43,7 +24,6 @@ for (let i = 9; i < 18; i++) {
   divRow.append(ColumnLeft);
 
   var ColumnMiddle = $("<div>").addClass("col-md-8 decription");
-  // ColumnMiddle.setAttribute("class", "col-md-8 decription");
   ColumnMiddle.attr("id", "cm" + i);
   var textArea = $("<textarea>");
   textArea.attr("value", i);
@@ -61,7 +41,7 @@ for (let i = 9; i < 18; i++) {
   storedData(i);
 }
 
-// FUNCTIONS=========================
+// HELPER FUNCTIONS=========================
 
 // converting AM to PM for Left Column
 function timeConversion(num) {
@@ -76,6 +56,18 @@ function timeConversion(num) {
   return amToPm;
 }
 
+function colorChange() {
+  for (let i = 9; i < 18; i++) {
+    var idColMid = $(`#cm${i}`);
+    if (i === currentTime) {
+      idColMid.addClass("present");
+    } else if (i > currentTime) {
+      idColMid.addClass("future");
+    } else if (i < currentTime) {
+      idColMid.addClass("past");
+    }
+  }
+}
 // local storage
 function storedData(data) {
   var entry = localStorage.getItem(data);
