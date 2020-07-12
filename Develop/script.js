@@ -88,6 +88,9 @@ $(document).ready(function () {
     if (entry !== null) {
       console.log("!==null");
       // $("#cm" + data).text(entry);
+      $("#cm" + data)
+        .children()
+        .val(entry);
     } else {
     }
   }
