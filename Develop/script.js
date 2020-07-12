@@ -87,7 +87,7 @@ $(document).ready(function () {
     console.log("before if " + entry);
     if (entry !== null) {
       console.log("!==null");
-      $("#cm" + data).(entry);
+      // $("#cm" + data).text(entry);
     } else {
     }
   }
