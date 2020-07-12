@@ -44,7 +44,7 @@ $(document).ready(function () {
     ColumnRight.append(saveB);
     divRow.append(ColumnRight);
 
-    storedData(i);
+    getData(i);
   }
 
   // HELPER FUNCTIONS=========================
@@ -82,10 +82,13 @@ $(document).ready(function () {
   var commentText;
 
   // local storage
-  function storedData(data) {
+  function getData(data) {
     var entry = localStorage.getItem(data);
+    console.log("before if " + entry);
     if (entry !== null) {
-      $("#cm" + data).text(entry);
+      console.log("!==null");
+      $("#cm" + data).(entry);
+    } else {
     }
   }
 
@@ -99,14 +102,20 @@ $(document).ready(function () {
   //   console.log("savB is here!");
   // });
 
-  saveB.on("submit", function () {
-    // event.preventDefault();
+  // $(document).on('click', '.saveBtn', function () {
+
+  $(document).on("click", ".saveBtn", function () {
+    event.preventDefault();
     console.log("im here");
     var entryID = $(this).val();
-    var entryText = $(this).parent().sibling().children(".description").val();
-    localStorage.setItem(entryID, entryText);
     console.log(entryID);
+    var entryText = $(this)
+      .parent(".col-md-2")
+      .siblings(".col-md-8")
+      .children()
+      .val();
     console.log(entryText);
+    localStorage.setItem(entryID, entryText);
   });
 
   // Display based on user input===========================
