@@ -21,45 +21,42 @@ $(".lead");
 timeEl.innerHTML = moment().format("MMMM Do YYYY, h:mm:ss a");
 
 // CREATING BOOTSTRAP RESPONSIVE ROWS AND COLUMNS
-var divRow;
-var ColumnLeft;
-var ColumnMiddle;
-var ColumnRight;
-var time;
-var textArea;
-var saveB;
+// var divRow;
+// var ColumnLeft;
+// var ColumnMiddle;
+// var ColumnRight;
+// var time;
+// var textArea;
+// var saveB;
 
 for (let i = 9; i < 18; i++) {
-  divRow = document.createElement("div");
-  divRow.setAttribute("class", "row");
-  document.body.appendChild(divRow);
-  //   console.log("check divRow");
-  // create 3 columns inside each row
+  var divRow = $("<div>").addClass("row");
+  $(".container").prepend(divRow);
+  console.log("check");
 
-  ColumnLeft = document.createElement("div");
-  ColumnLeft.setAttribute("class", "col-md-2 hour");
-  time = document.createElement("time");
+  var ColumnLeft = $("<div>").addClass("col-md-2 hour");
+  // ColumnLeft.setAttribute("class", "col-md-2 hour");
+  var time = $("<time>");
   //   time.setAttribute("class", "hour");
-  ColumnLeft.innerHTML = timeConversion(i);
-  ColumnLeft.appendChild(time);
-  divRow.appendChild(ColumnLeft);
+  ColumnLeft.html(timeConversion(i));
+  ColumnLeft.append(time);
+  divRow.append(ColumnLeft);
 
-  ColumnMiddle = document.createElement("div");
-  ColumnMiddle.setAttribute("class", "col-md-8 decription");
-  ColumnMiddle.setAttribute("id", "cm" + i);
-  textArea = document.createElement("textarea");
-  textArea.setAttribute("value", i);
-  ColumnMiddle.appendChild(textArea);
+  var ColumnMiddle = $("<div>").addClass("col-md-8 decription");
+  // ColumnMiddle.setAttribute("class", "col-md-8 decription");
+  ColumnMiddle.attr("id", "cm" + i);
+  var textArea = $("<textarea>");
+  textArea.attr("value", i);
+  ColumnMiddle.append(textArea);
+  divRow.append(ColumnMiddle);
 
-  divRow.appendChild(ColumnMiddle);
-
-  ColumnRight = document.createElement("div");
-  ColumnRight.setAttribute("class", "col-md-2");
-  saveB = document.createElement("button");
-  saveB.setAttribute("class", "saveBtn");
-  saveB.setAttribute("value", i);
-  ColumnRight.appendChild(saveB);
-  divRow.appendChild(ColumnRight);
+  var ColumnRight = $("<div>").addClass("col-md-2");
+  // ColumnRight.setAttribute("class", "col-md-2");
+  var saveB = $("<button>").addClass("saveBtn");
+  // saveB.setAttribute("class", "saveBtn");
+  saveB.attr("value", i);
+  ColumnRight.append(saveB);
+  divRow.append(ColumnRight);
 
   storedData(i);
 }
